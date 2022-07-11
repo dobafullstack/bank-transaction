@@ -1,0 +1,6 @@
+$red: #e90044;
+$blue: #1c00d1;
+
+@function resize($dp) {
+  @return calc($dp * 0.75px);
+}
