@@ -7,7 +7,7 @@ import "./home.scss";
 export default function Home() {
   return (
     <div className="home-wrapper">
-      <HomeHeader />
+      <HomeHeader title="Chuyển tiền" />
       <div className="home-body">
         <p className="from title">Từ tài khoản nguồn</p>
         <FromContainer />

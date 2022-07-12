@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 import { TextField } from "@mui/material";
 
 type Props = {
@@ -7,6 +7,8 @@ type Props = {
   placeholder?: string;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   error?: boolean;
+  type?: HTMLInputTypeAttribute;
+  margin?: boolean;
 };
 
 export default function TextInput({
@@ -14,7 +16,9 @@ export default function TextInput({
   title,
   placeholder,
   error,
+  type,
   onChange,
+  margin = true,
 }: Props) {
   return (
     <TextField
@@ -22,7 +26,7 @@ export default function TextInput({
       onChange={onChange}
       placeholder={placeholder}
       style={{
-        marginBottom: 30,
+        marginBottom: margin ? 30 : 0,
       }}
       label={
         <p
@@ -38,6 +42,7 @@ export default function TextInput({
       variant="outlined"
       aria-readonly
       fullWidth
+      type={type}
       value={value}
     />
   );

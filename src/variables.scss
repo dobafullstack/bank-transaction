@@ -1,6 +1,16 @@
 $red: #e90044;
+$red-1: #fad2ce;
+$red-2: #fce0d8;
 $blue: #1c00d1;
+$background: #fffced;
+$primary: #ec7171;
 
 @function resize($dp) {
   @return calc($dp * 0.75px);
+}
+
+@mixin newFont {
+  font-family: "Pacifico", cursive;
+
+  @content;
 }

@@ -76,6 +76,12 @@
         border: none;
         outline: none;
       }
+
+      p.count {
+        margin: resize(20) 0;
+        color: gray;
+        
+      }
     }
   }
 }

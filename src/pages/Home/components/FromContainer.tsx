@@ -9,7 +9,7 @@ export default function FromContainer() {
       <div className="info">
         <p className="account">6666411208888 - NGUYEN DUY ANH</p>
         <p className="asset">
-          <strong>1,998,604</strong> VND
+          <strong>10,000,000,000</strong> VND
         </p>
       </div>
       <FaAngleDown />

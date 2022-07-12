@@ -2,11 +2,15 @@ import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaAngleLeft } from "react-icons/fa";
 
-export default function HomeHeader() {
+type Props = {
+  title: string;
+}
+
+export default function HomeHeader({title}: Props) {
   return (
     <div className="home-header">
       <FaAngleLeft />
-      <h1>Chuyển tiền</h1>
+      <h1>{title}</h1>
       <AiFillHome />
     </div>
   );
