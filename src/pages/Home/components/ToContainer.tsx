@@ -72,7 +72,7 @@ export default function ToContainer() {
       <TextInput
         title="Số tiền"
         placeholder="Nhập số tiền"
-        type="number"
+        type="tel"
         error={errorAsset}
         value={asset}
         margin={assetString.length === 0}
