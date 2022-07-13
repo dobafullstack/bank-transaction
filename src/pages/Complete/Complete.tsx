@@ -1,11 +1,7 @@
-import React from "react";
+import { FaCheckCircle } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import HomeHeader from "../Home/components/HomeHeader";
-import { FaCheckCircle } from "react-icons/fa";
 import "./complete.scss";
-import { TextField } from "@mui/material";
-import TextInput from "../../shared/TextInput";
-import GetNow from "../../helpers/GetNow";
 
 export default function Complete() {
   const { state } = useLocation();
@@ -24,14 +20,7 @@ export default function Complete() {
         <Input title="Tài khoản trích nợ" value="6666411208888" />
         <Input title="Tài khoản thụ hưởng" value="070120026754" />
         <Input title="Tên tài khoản" value="TRINH HONG BAO THY" />
-        <Input
-          title="Số tiền trích nợ"
-          value={parseInt(asset).toLocaleString("vi", {
-            style: "currency",
-            currency: "VND",
-            // currencyDisplay: "đ",
-          })}
-        />
+        <Input title="Số tiền trích nợ" value={`${asset} VND`} />
         <Input title="Nội dung chuyển tiền" value={content} />
 
         <p className="note">

@@ -1,0 +1,56 @@
+@import "../../variables.scss";
+
+.gift-container {
+  height: 100vh;
+  padding: 0 resize(50);
+  background-color: $green;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  main {
+    background-color: $background;
+    height: resize(700);
+    width: 100%;
+    border-radius: resize(50);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      width: resize(400);
+      margin-top: resize(50);
+    }
+
+    h1.title {
+      @include newFont;
+      color: $primary;
+      font-size: resize(36);
+      margin: 0;
+    }
+
+    p.sub {
+      @include newFont;
+      color: #e2a9ac;
+      font-size: resize(24);
+      margin-bottom: resize(80);
+    }
+
+    button {
+      color: white;
+      background-color: $primary;
+      border-radius: resize(40);
+      font-size: resize(36);
+      padding: resize(15) resize(50);
+      margin-bottom: resize(40);
+    }
+
+    p.description {
+      @include newFont;
+      color: $primary;
+    }
+  }
+}

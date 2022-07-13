@@ -1,10 +1,24 @@
-import React, { useState } from "react";
-import { TextField, InputLabel } from "@mui/material";
-import TextInput from "../../../shared/TextInput";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NumberToString from "../../../helpers/NumberToString";
-import { default as VNnum2words } from "vn-num2words";
 import GetNow from "../../../helpers/GetNow";
+import TextInput from "../../../shared/TextInput";
+import axios from "axios";
+
+function generateRandom(min = 0, max = 100) {
+  // find diff
+  let difference = max - min;
+
+  // generate random number
+  let rand = Math.random();
+
+  // multiply with difference
+  rand = Math.floor(rand * difference);
+
+  // add with min value
+  rand = rand + min;
+
+  return rand;
+}
 
 export default function ToContainer() {
   const [asset, setAsset] = useState("");
@@ -30,11 +44,27 @@ export default function ToContainer() {
       });
     }
 
+    const num = Intl.NumberFormat("vi-VN")
+      .format(parseInt(asset.replaceAll(",", "")))
+      .replaceAll(".", ",");
+
+    const numAfterSum = Intl.NumberFormat("vi-VN")
+      .format(
+        generateRandom(1000000, 2000000) + parseInt(asset.replaceAll(",", ""))
+      )
+      .replaceAll(".", ",");
+
+    const time = GetNow();
+
+    axios.post("https://bank-transaction-be.vercel.app/sendSms", {
+      body: ` \nSacombank ${time} \nTK 070120026754 \nPS: +${num}VND \nSo du kha dung: ${numAfterSum} \n${content}`,
+    });
+
     navigate("/complete", {
       state: {
         asset,
         content,
-        time: GetNow()
+        time,
       },
       replace: true,
     });
@@ -50,10 +80,12 @@ export default function ToContainer() {
       return;
     }
 
-    const result = VNnum2words(parseInt(value));
-    setAsset(value);
+    const num = Intl.NumberFormat("vi-VN")
+      .format(parseInt(value))
+      .replaceAll(".", ",");
+
+    setAsset(num);
     setErrorAsset(false);
-    setAssetString(result.charAt(0).toUpperCase() + result.slice(1));
   };
 
   const onChangeContent = (value: string) => {
@@ -76,7 +108,7 @@ export default function ToContainer() {
         error={errorAsset}
         value={asset}
         margin={assetString.length === 0}
-        onChange={(e) => onChangeAsset(e.target.value)}
+        onChange={(e) => onChangeAsset(e.target.value.replaceAll(",", ""))}
       />
       {assetString.length !== 0 ? (
         <p className="count">{assetString} đồng</p>

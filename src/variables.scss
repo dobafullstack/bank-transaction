@@ -4,6 +4,7 @@ $red-2: #fce0d8;
 $blue: #1c00d1;
 $background: #fffced;
 $primary: #ec7171;
+$green: #51d5c3;
 
 @function resize($dp) {
   @return calc($dp * 0.75px);

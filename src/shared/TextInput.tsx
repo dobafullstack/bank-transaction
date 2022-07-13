@@ -24,7 +24,6 @@ export default function TextInput({
     <TextField
       error={error}
       onChange={onChange}
-      // inputMode={type === "number" ? "numeric" : undefined}
       placeholder={placeholder}
       style={{
         marginBottom: margin ? 30 : 0,
