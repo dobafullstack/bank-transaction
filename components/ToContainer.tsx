@@ -4,6 +4,8 @@ import TextInput from "./TextInput";
 import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "../styles/home.module.scss";
+import { LoadingButton } from "@mui/lab";
+import { CircularProgress } from "@mui/material";
 
 function generateRandom(min = 0, max = 100) {
   // find diff
@@ -27,13 +29,13 @@ export default function ToContainer() {
   const [errorAsset, setErrorAsset] = useState(false);
   const [errorContent, setErrorContent] = useState(false);
   const [content, setContent] = useState("");
-
-  var accountSid = "AC17bc4654122bd09b233cfccb2d094eec"; // Your Account SID from www.twilio.com/console
-  var authToken = "d64a9527497e467c7d38229356fa015e"; // Your Auth Token from www.twilio.com/console
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const onSubmit = () => {
+    setLoading(true);
+
     if (asset.length === 0 || content.length === 0) {
       return setErrorAsset(() => {
         if (content.length === 0) {
@@ -60,15 +62,14 @@ export default function ToContainer() {
 
     const time = GetNow();
 
-    axios.post("/api/sendSms", {
-      body: `- \nSacombank ${time} \nTK 070120026754 \nPS: +${num}VND \nSo du kha dung: ${numAfterSum} \n${content}`,
-    });
-
-    router.push(`/complete?asset=${asset}&content=${content}&time=${time}`, {
-      // query: {
-      //   time, asset, content
-      // }
-    });
+    axios
+      .post("/api/sendSms", {
+        body: `- \nSacombank ${time} \nTK 070120026754 \nPS: +${num}VND \nSo du kha dung: ${numAfterSum} \n${content}`,
+      })
+      .then(() => {
+        setLoading(false);
+        router.push(`/complete?asset=${asset}&content=${content}&time=${time}`);
+      });
   };
 
   const onChangeAsset = (value: string) => {
@@ -121,9 +122,22 @@ export default function ToContainer() {
         value={content}
         onChange={(e) => onChangeContent(e.target.value)}
       />
-      <button className={styles["btn-submit"]} onClick={onSubmit}>
-        Tiếp tục
-      </button>
+      <LoadingButton
+        loading={loading}
+        loadingIndicator={
+          <CircularProgress
+            size={16}
+            style={{
+              color: "white",
+            }}
+          />
+        }
+        className={styles["btn-submit"]}
+        onClick={onSubmit}
+        variant="contained"
+      >
+        {!loading ? "Tiếp tục" : ""}
+      </LoadingButton>
     </div>
   );
 }

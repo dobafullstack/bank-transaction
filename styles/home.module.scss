@@ -69,15 +69,17 @@
 }
 
 .btn-submit {
-  width: 100%;
-  border-radius: resize(8);
-  background-color: $blue;
-  color: white;
-  font-size: resize(20);
-  font-family: "Quicksand";
-  padding: resize(15) 0;
-  border: none;
-  outline: none;
+  width: 100% !important;
+  border-radius: resize(8) !important;
+  background-color: $blue !important;
+  color: white !important;
+  font-size: resize(20) !important;
+  font-family: "Quicksand" !important;
+  // padding: resize(15) 0 !important;
+  
+  border: none !important;
+  outline: none !important;
+  height: 41.5px;
 }
 
 .count {
