@@ -6,31 +6,27 @@ import NextCors from "nextjs-cors";
 
 import Cors from "cors";
 
-// Initializing the cors middleware
-// You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-const cors = Cors({
-  methods: ["POST", "GET", "HEAD"],
-});
+const allowCors = (fn: Function) => async (req: any, res: any) => {
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+  return await fn(req, res);
+};
 
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  fn: Function
-) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result: any) => {
-      if (result instanceof Error) {
-        return reject(result);
-      }
-
-      return resolve(result);
-    });
-  });
-}
-
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse<MessageInstance | string>
 ) {
@@ -43,7 +39,7 @@ export default async function handler(
 
   if (req.method === "POST") {
     var accountSid = "AC17bc4654122bd09b233cfccb2d094eec"; // Your Account SID from www.twilio.com/console
-    var authToken = "d64a9527497e467c7d38229356fa015e"; // Your Auth Token from www.twilio.com/console
+    var authToken = "85dbb3fc01926d6cf4f3f33f2cf95d7a"; // Your Auth Token from www.twilio.com/console
 
     const client = twilio(accountSid, authToken, {
       lazyLoading: true,
@@ -60,3 +56,5 @@ export default async function handler(
     res.status(200).json("Only POST method is accepted");
   }
 }
+
+export default allowCors(handler);
