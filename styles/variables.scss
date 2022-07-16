@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+$red: #e90044;
+$red-1: #fad2ce;
+$red-2: #fce0d8;
+$blue: #1c00d1;
+$background: #fffced;
+$primary: #ec7171;
+$green: #51d5c3;
+
+@function resize($dp) {
+  @return calc($dp * 0.75px);
+}
+
+@mixin newFont {
+  font-family: "Pacifico", cursive;
+
+  @content;
+}
