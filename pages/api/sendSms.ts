@@ -38,8 +38,8 @@ async function handler(
   });
 
   if (req.method === "POST") {
-    var accountSid = "AC17bc4654122bd09b233cfccb2d094eec"; // Your Account SID from www.twilio.com/console
-    var authToken = "85dbb3fc01926d6cf4f3f33f2cf95d7a"; // Your Auth Token from www.twilio.com/console
+    var accountSid = process.env.ACCOUNT_SID; // Your Account SID from www.twilio.com/console
+    var authToken = process.env.AUTH_TOKEN; // Your Auth Token from www.twilio.com/console
 
     const client = twilio(accountSid, authToken, {
       lazyLoading: true,
@@ -47,8 +47,8 @@ async function handler(
 
     const response = await client.messages.create({
       body: req.body.body,
-      from: "+15706724897",
-      to: "+84944609933",
+      from: process.env.PHONE_NUMBER_FROM,
+      to: process.env.PHONE_NUMBER_TO as string,
     });
 
     res.status(200).json(response);
