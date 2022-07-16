@@ -1,0 +1,65 @@
+@import "./variables.scss";
+
+.cardContainer {
+  height: 100vh;
+  padding: 0 resize(50);
+  background-color: $green;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  background-color: $primary;
+  height: resize(700);
+  width: 100%;
+  border-radius: resize(50);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  padding: resize(10) resize(30);
+}
+
+.title {
+  @include newFont;
+  font-size: resize(36);
+}
+
+.content {
+  @include newFont;
+  font-size: resize(22);
+}
+
+.sign {
+  @include newFont;
+  width: 100%;
+  font-size: resize(30);
+
+  text-align: right;
+  margin-top: resize(10);
+}
+
+.button {
+  width: resize(70);
+  height: resize(70);
+  border-radius: 100%;
+  background-color: $background;
+  border: none;
+  outline: none;
+  margin-bottom: resize(30);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $primary;
+}
+
+.subBtn {
+  @include newFont;
+  width: 100%;
+  text-align: center;
+}

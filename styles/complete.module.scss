@@ -1,0 +1,73 @@
+@import "./variables.scss";
+
+.complete-container {
+  background-color: #eee;
+  height: 100vh;
+}
+
+.success-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: resize(20);
+  border-radius: resize(20);
+  margin: resize(20) resize(16);
+}
+
+.p {
+  margin: resize(20) 0;
+  font-size: resize(26);
+}
+
+.input {
+  background-color: #fff;
+  padding: resize(10) resize(16);
+  display: flex;
+  flex-direction: column;
+  gap: resize(5);
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.415);
+}
+
+.title {
+  color: gray;
+  font-size: resize(18);
+}
+
+.value {
+  font-size: resize(22);
+}
+
+.note {
+  padding: resize(16);
+  font-style: italic;
+  font-size: resize(18);
+  font-weight: 500;
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: resize(20);
+  padding: 0 resize(16);
+}
+
+.btn {
+  flex: 1;
+  padding: resize(15);
+  border-radius: resize(8);
+  outline: none;
+  border: none;
+  color: white;
+  text-align: center;
+}
+
+.btn-save {
+  background-color: rgba(128, 128, 128, 0.514);
+}
+
+.btn-new {
+  background-color: $blue;
+}
