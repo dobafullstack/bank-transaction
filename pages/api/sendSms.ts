@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import twilio from "twilio";
 import { MessageInstance } from "twilio/lib/rest/api/v2010/account/message";
+import NextCors from "nextjs-cors";
 
 import Cors from "cors";
 
@@ -33,7 +34,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<MessageInstance | string>
 ) {
-  await runMiddleware(req, res, cors);
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
 
   if (req.method === "POST") {
     var accountSid = "AC17bc4654122bd09b233cfccb2d094eec"; // Your Account SID from www.twilio.com/console
